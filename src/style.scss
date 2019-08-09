@@ -1,3 +1,18 @@
+$bg_header : mediumslateblue;
+$bg_geral : #333;
+$bg_footer : rgb(24, 30, 37);
+$font-family : 'Work Sans', sans-serif;
+$font-size : 14px;
+$body-font-weight: 300;
+$heading-font-weight: 700;
+$color-1 : #fff;
+$color-2 : lightblue;
+$color-3 : #444;
+$span-color: #5a6875;
+$break : 800px;
+body{
+  font-family: 'Open Sans', sans-serif;
+}
 header {
   
    width: 100%;
@@ -51,5 +66,180 @@ header {
       }
     }
   }
-  
+  .site-branding{
+    line-height: 42px;
+    padding: 1px 50px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    text-align:center;
+    .site-logo {
+      text-align:center;
+      padding:15px;
+      img{
+        width:204px;
+        
+      }
+    }
+    h5{
+        font-weight:700;
+    }
+    
+    .site-contact {
+      display:none;
+    }
+  }
+}
+
+.header-menu {
+    background:  $bg_header;
+    text-align: center;
+    position: fixed;
+    z-index: 999;
+    width: 100%;
+   
+
+    .nav-toggle {
+        position:absolute;
+        top: -9999px !important;
+        left: -9999px !important;
+        &:focus {
+            ~ {
+                .nav-toggle-label{
+                    outline: 3px solid rgba($color-2, 0);
+                }
+            }
+        }
+        &:checked {
+            ~ {
+                nav {
+                    transform: scale(1,1);
+                    a {
+                        opacity: 1;
+                        transition: opacity 250ms ease-in-out 250ms;
+                    }
+                }
+            }
+        }
+    }
+
+    .nav-toggle-label{
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin-left: 1em;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        width: 2em;
+        span,
+        span::before,
+        span::after {
+            display: block;
+            background: $color-1;
+            height: 2px;
+            width: 2em;
+            border-radius: 2px;
+            position: relative;
+            content: "";
+            position: absolute;
+        }
+        span{
+            &::before{
+                bottom: 7px;
+            }
+            &::after {
+                top: 7px;
+            }
+        }
+    }
+
+    nav {
+        position: absolute;
+        background: $bg_header;
+        text-align: center;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        transform: scale(1, 0);
+        transform-origin: top;
+        transition: transform 400ms ease-in-out;
+        ul {
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 1em;
+            margin-top: 1em;
+        }
+
+        a {
+            color: $color-1;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            opacity: 0;
+            transition: opacity 150ms ease-in-out;
+            &:hover{
+                color: $color-3;
+            }
+        }
+    }
+
+    @media screen and (min-width: $break){
+        .nav-toggle-label{
+            display: none;
+        }
+
+        nav {
+            position: relative;
+            text-align: left;
+            transform: scale(1,1);
+            transition: none;
+            left:initial;
+            top:initial;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            grid-column: 3 / 4;
+            ul{
+                display: flex;
+                li {
+                    margin-left: 3em;
+                    margin-bottom: 0;
+                    a{
+                        opacity: 1;
+                        position: relative;
+                        &::before{
+                            content: "";
+                            display: block;
+                            height: 5px;
+                            width: 0%;
+                            background-color: $color-3;
+                            top:0;
+                        }
+                        &:hover::before{
+                            width: 100%;
+                            transition:  all ease-in-out 450ms;
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+
+}
+
+
+@media screen and (min-width: $break) {
+    .header-menu{
+        display: grid;
+        grid-template-columns: 1fr auto minmax(600px, 3fr) 1fr;
+        
+        a {
+            grid-column: 2 / 3;
+        }
+    }
 }
